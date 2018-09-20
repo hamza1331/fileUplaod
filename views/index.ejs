@@ -20,6 +20,24 @@
                 </div>
                 <input type="submit" value="Submit" class="btn btn-info btn-block">
                 </form>
+                <hr>
+                <% if(files){ %>
+                <% files.forEach(function(file){ %>
+                <div class="card card-body mb-3">
+                    <% if(file.isImage){ %>
+                        <a href="image/<%=file.filename%>"><img class="img img-responsive" width="100%" src="image/<%=file.filename%>" alt=""></a>
+                    <%} else{ %>
+                        <a href="getfile/<%=file.filename%>" target="_blank"><%=file.filename%></a>
+                    <%} %>
+                    <form action="/files/<%=file._id%>?_method=DELETE" method="post">
+                    <button class="btn btn-danger btn-block mt-4">DELETE</button>
+                    </form>
+                </div>
+                
+                <% })%>
+                <%} else{ %>
+                    <p>No Files to Show</p>
+                <% }%>
             </div>
         </div>
     </div>
